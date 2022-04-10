@@ -1,0 +1,9 @@
+x = 25
+y = 15
+print('result x+y =', x+y)
+print('result x-y =', x-y)
+print('result x/y =', x/y)
+print('result x*y =', x*y)
+print('result x//y =', x//y)
+print('result x%y =', x%y)
+print('result x**y =', x**y)
