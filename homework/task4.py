@@ -1,4 +1,4 @@
 print('Для нахождения площади квадрата введите длину стороны')
-a = input()
-a = int(a)
-print('Площадь квадрата равна', a**2)
+square_side = input()
+square_side = int(square_side)
+print('Площадь квадрата равна', square_side**2)
