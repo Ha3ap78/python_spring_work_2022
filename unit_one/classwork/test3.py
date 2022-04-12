@@ -5,3 +5,8 @@
 # str = "Hello world!"
 # Ответ: Первая часть  "Hello"
 # 		Вторая часть "world!"
+
+print("Введите текст")
+text = input()
+print("Первая часть -", text[:len(text)//2])
+print("Вторая часть -", text[len(text)//2:])

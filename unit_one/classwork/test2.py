@@ -5,3 +5,12 @@
 # Ответ:
 # сумма - 5
 # произведение - 6
+
+print("Введите целое число от 10 до 99")
+experimental = input()
+A = experimental[0]
+A = int(A)
+B = experimental[1]
+B = int(B)
+print("сумма -", A+B)
+print("произведение -", A*B)
