@@ -38,27 +38,26 @@ print(board)
 guesses = 0
 full_word = []
 
-while full_word < answer:
-    if full_word < answer:
-        while guesses < 10:
-            guess = input("Назовите букву: ")
-            for i in answer:
-                if guess in answer:
-                    if answer.count(guess) == 1:
-                        full_word.insert(answer.index(guess), guess)
-                        board[answer.index(guess)] = guess
-                        print("Здорово! Есть такая буква! Откройте букву", guess,"на табло!")
-                        print(board)
-                        break
-                    if answer.count(guess) > 1:
-                        indices = [i for i, x in enumerate(answer) if x == guess]
-                        board[indices[0]] = guess
-                        board[indices[1]] = guess
-                        full_word.insert(indices[0], guess)
-                        full_word.insert(indices[1], guess)
-                        print("Здорово! Есть такая буква! Откройте букву", guess, "на табло!")
-                        print(board)
-                        break
+if full_word < answer:
+    while guesses < 10:
+        guess = input("Назовите букву: ")
+        for i in answer:
+            if guess in answer:
+                if answer.count(guess) == 1:
+                    full_word.insert(answer.index(guess), guess)
+                    board[answer.index(guess)] = guess
+                    print("Здорово! Есть такая буква! Откройте букву", guess,"на табло!")
+                    print(board)
+                    break
+                if answer.count(guess) > 1:
+                    indices = [i for i, x in enumerate(answer) if x == guess]
+                    board[indices[0]] = guess
+                    board[indices[1]] = guess
+                    full_word.insert(indices[0], guess)
+                    full_word.insert(indices[1], guess)
+                    print("Здорово! Есть такая буква! Откройте букву", guess, "на табло!")
+                    print(board)
+                    break
             if guess not in answer:
                 guesses = guesses + 1
                 print("К сожалению, нет такой буквы! У вас осталось ", 10 - guesses, "попыток!")
@@ -66,8 +65,6 @@ while full_word < answer:
         else:
             print("Вы проиграли! Словов было -", words[desc.index(r)], ". Удачи в следующий раз! До свидания!")
             break
-else:
-    print("Поздравляю,", name, "! Вы выиграли! Вы отгадали слово - это", words[desc.index(r)], "!")
-
-# все еще не могу найти ошибку чтобы при заполнении ответа сразу всплывало сообщение о победе
-# очень прошу объяснить этот момент и вопрос описанный в коментарии к task14
+        if "□" not in board:
+            print("Поздравляю,", name, "! Вы выиграли! Вы отгадали слово - это", words[desc.index(r)], "!")
+            break
