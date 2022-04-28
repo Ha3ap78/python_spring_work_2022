@@ -13,7 +13,7 @@ dice_2 = (1, 2, 3, 4, 5, 6)
 all_options = []
 options = []
 summa = 1
-number = 1
+number = 2
 
 
 
@@ -25,11 +25,16 @@ while summa < 13:
                 var = (i, j)
                 all_options.append(var)
                 break
-print(all_options)
+while number < 13:
+    for i in all_options:
+        if sum(i) == number:
+            options.append(i)
+    print("Сумма", number, "перечень комбинаций", options)
+    options.clear()
+    number += 1
 
-# все комбинации по кортежам распихал.
-# безуспешно потратил ОЧЕНЬ МНОГО времени на попытку их распределеить по спискам.
-# нужна помощь
+
+
 
 
 
