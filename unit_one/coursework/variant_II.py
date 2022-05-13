@@ -6,32 +6,37 @@
 # Перепишите процедуру  MERGE_SORT и отсортируйте последовательность
 A = [31, 41, 9, 26, 41, 58, -1, 6, 101, 13]  # по возрастанию
 
-def merge_sort (numbers):
-    if len(numbers) > 1:
-        a = numbers[:len(numbers)//2]  # первая половина массива
-        b = numbers[len(numbers)//2:]  # вторая половина массива
-        merge_sort(a)
-        merge_sort(b)
+import math
 
-        i = j = k = 0  # индексы в списках a, b, numbers
-        while i < len(a) and j < len(b):
-            if a[i] < b[j]:
-                numbers[k] = a[i]
-                i += 1
-            else:
-                numbers[k] = b[j]
-                j += 1
-            k += 1
+def merge_sort(A, p, r):
+    if p < r:
+        q = (p + r) // 2
+        merge_sort(A, p, q)
+        merge_sort(A, q + 1, r)
+        merge(A, p, q, r)
+    return A
 
-        while i < len(a):
-            numbers[k] = a[i]
-            i += 1
-            k += 1
-        while j < len(b):
-            numbers[k] = b[j]
+def merge(A, p, q, r):
+    n1 = q - p + 1  # вычисляем длину левого и правого массива
+    n2 = r - q
+    L = [0] * (n1 + 1)   # создаем массив их нулей чтобы заполнить соотв числами из основного массива
+    R = [0] * (n2 + 1)
+    for i in range(n1):
+        L[i] = A[p + i - 1]  # заполняем
+    for j in range(n2):
+        R[j] = A[q + j]
+    L[n1] = math.inf
+    R[n2] = math.inf
+    i = 0
+    j = 0
+    for k in range(p - 1, r):  # заходим в цикл где будем сравнивать левый и правый массивы
+        if L[i] <= R[j]:  # если след. число из левого массива меньше правого, ставим левое
+            A[k] = L[i]
+            i += 1  # увеличиваем счетчик - переходим на след. число ЛЕВОГО массива
+        else:
+            A[k] = R[j]  # иначе добавляем правое и переходим на след число ПРАВОГО массива
             j += 1
-            k += 1
+    return A
 
 
-merge_sort(A)
-print(A)
+print(merge_sort(A, 1, len(A)))
