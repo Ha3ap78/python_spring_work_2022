@@ -12,9 +12,13 @@
 # ||4 5 6||  =>  ||2 5||
 #                ||3 6||
 
-matrix = [[1, 2, 3], [4, 5, 6]]
+matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
 
 def transpose(matrix):
-        return [[i, j] for i in matrix[0] for j in matrix[1] if matrix[0].index(i) == matrix[1].index(j)]
+    columns = len(matrix)
+    strings = len(matrix[1])
+    transp_matrix = [[matrix[j][i] for j in range(columns)] for i in range(strings)]
+    return transp_matrix
 
-print(transpose(matrix))
+print(f'Исходная матрица {matrix}')
+print(f'Транспонированная матрица {transpose(matrix)}')
