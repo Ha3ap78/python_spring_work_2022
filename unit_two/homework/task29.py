@@ -20,5 +20,7 @@ def transpose(matrix):
     transp_matrix = [[matrix[j][i] for j in range(columns)] for i in range(strings)]
     return transp_matrix
 
+
 print(f'Исходная матрица {matrix}')
+
 print(f'Транспонированная матрица {transpose(matrix)}')
