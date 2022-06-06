@@ -46,8 +46,9 @@ def authorization():
                 cur.execute(f"SELECT login, password FROM public.user WHERE login LIKE '{login}'")
                 hashed_pass = cur.fetchone()
                 if bcrypt.checkpw(pswd.encode(), hashed_pass[1].encode()):
-                    cur.execute(f"SELECT name, surname FROM public.profile "
-                                f"WHERE id_user = (SELECT id_user FROM public.user WHERE login LIKE '{login}')")
+                    cur.execute(f"""SELECT name, surname FROM public.profile a
+                                        JOIN public.user b ON a.id_user = b.id_user
+                                        WHERE b.login LIKE '{login}'""")
                     data = cur.fetchone()
                     if data != None:
                         print(f'Добро пожаловать {data[0]} {data[1]}!')
@@ -105,15 +106,18 @@ def registration():
                 if cur.fetchone() == None:
                     cur.execute(f"""INSERT INTO public.student (id_group, name, surname, age, tel, id_user)
                            VALUES
-                           ((SELECT id_group FROM public.group WHERE name LIKE '{group}'), '{name}', '{surname}', '{age}', '{tel}',
+                           ((SELECT id_group FROM public.group 
+                           WHERE name LIKE '{group}'), '{name}', '{surname}', '{age}', '{tel}',
                            (SELECT id_user FROM public.user WHERE login LIKE '{login}'))""")
                 # conn.commit()
 
                 cur.execute(f"""
-                       INSERT INTO profile (id_user, id_student, name, surname, patronymic, dt_birth, tel, email, id_group)
+                       INSERT INTO profile (id_user, id_student, name, surname, 
+                       patronymic, dt_birth, tel, email, id_group)
                        VALUES 
                        ((SELECT id_user FROM public.user WHERE login LIKE '{login}'), 
-                       (SELECT id_student FROM student WHERE id_user = (SELECT id_user FROM public.user WHERE login LIKE '{login}')), 
+                       (SELECT id_student FROM student WHERE id_user = 
+                       (SELECT id_user FROM public.user WHERE login LIKE '{login}')), 
                        '{name}', '{surname}', '{patronym}', '{dt_birth.strftime("%Y-%m-%d")}', '{tel}', '{email}',
                        (SELECT id_group FROM public.group WHERE name LIKE '{group}'))""")
 
