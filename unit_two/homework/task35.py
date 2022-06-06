@@ -11,7 +11,8 @@ class DB:
 
     __instance__ = None
 
-    def __new__(cls, *args, **kwargs):
+    def __new__(cls, *args, **kwargs):  # '''Singltone класс. Метод возвращает объект класса DB
+                                        # и запрещает создание других экзмепляров класса''
         if not cls.__instance__:
             cls.__instance__ = object.__new__(cls)
             return cls.__instance__
@@ -49,7 +50,7 @@ class Auth:
 
         login = input('Введите логин: ')
 
-        if self.user_in_base(login) == False or login != '':
+        if self.user_in_base(login) == False and login != '':
             pswd = input('Введите пароль: ')
             pswd = bcrypt.hashpw(pswd.encode(), bcrypt.gensalt())
             surname = input('Введите фамилию: ')
